@@ -4,7 +4,9 @@
 #include <QFileInfo>
 #include <QRegularExpression>
 #include <tuple>
+#include <QApplication>
 
+#include "Application.h"
 #include "FileSystem.h"
 #include "StringUtils.h"
 
@@ -222,7 +224,7 @@ auto Resource::destroy(const QDir& index_dir, bool preserve_metadata, bool attem
         destroyMetadata(index_dir);
     }
 
-    return (attempt_trash && FS::trash(m_file_info.filePath())) || FS::deletePath(m_file_info.filePath());
+    return (attempt_trash && APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(m_file_info.filePath())) || FS::deletePath(m_file_info.filePath());
 }
 
 auto Resource::destroyMetadata(const QDir& index_dir) -> void

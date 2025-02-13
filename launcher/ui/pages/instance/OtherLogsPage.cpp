@@ -203,7 +203,7 @@ void OtherLogsPage::on_btnDelete_clicked()
     }
     QFile file(FS::PathCombine(m_path, m_currentFile));
 
-    if (FS::trash(file.fileName())) {
+    if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(file.fileName())) {
         return;
     }
 
@@ -238,7 +238,7 @@ void OtherLogsPage::on_btnClean_clicked()
     QStringList failed;
     for (auto item : toDelete) {
         QFile file(FS::PathCombine(m_path, item));
-        if (FS::trash(file.fileName())) {
+        if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(file.fileName())) {
             continue;
         }
         if (!file.remove()) {

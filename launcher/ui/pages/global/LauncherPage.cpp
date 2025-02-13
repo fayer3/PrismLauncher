@@ -210,6 +210,7 @@ void LauncherPage::applySettings()
     }
 
     s->set("MenuBarInsteadOfToolBar", ui->preferMenuBarCheckBox->isChecked());
+    s->set("UseRecycleBin", ui->useRecycleBinCheckBox->isChecked());
 
     s->set("NumberOfConcurrentTasks", ui->numberOfConcurrentTasksSpinBox->value());
     s->set("NumberOfConcurrentDownloads", ui->numberOfConcurrentDownloadsSpinBox->value());
@@ -268,6 +269,7 @@ void LauncherPage::loadSettings()
     ui->toolsBox->setVisible(!QMenuBar().isNativeMenuBar());
 #endif
     ui->preferMenuBarCheckBox->setChecked(s->get("MenuBarInsteadOfToolBar").toBool());
+    ui->useRecycleBinCheckBox->setChecked(s->get("UseRecycleBin").toBool());
 
     ui->numberOfConcurrentTasksSpinBox->setValue(s->get("NumberOfConcurrentTasks").toInt());
     ui->numberOfConcurrentDownloadsSpinBox->setValue(s->get("NumberOfConcurrentDownloads").toInt());

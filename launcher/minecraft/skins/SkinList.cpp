@@ -20,7 +20,9 @@
 
 #include <QFileInfo>
 #include <QMimeData>
+#include <QApplication>
 
+#include "Application.h"
 #include "FileSystem.h"
 #include "Json.h"
 #include "minecraft/skins/SkinModel.h"
@@ -313,7 +315,7 @@ bool SkinList::deleteSkin(const QString& key, const bool trash)
     int idx = getSkinIndex(key);
     if (idx != -1) {
         auto s = m_skin_list[idx];
-        if (trash) {
+        if (APPLICATION->settings()->get("UseRecycleBin").toBool() && trash) {
             if (FS::trash(s.getPath(), nullptr)) {
                 m_skin_list.remove(idx);
                 save();

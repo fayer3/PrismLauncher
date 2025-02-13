@@ -493,7 +493,7 @@ bool World::destroy()
     if (!is_valid)
         return false;
 
-    if (FS::trash(m_containerFile.filePath()))
+    if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(m_containerFile.filePath()))
         return true;
 
     if (m_containerFile.isDir()) {
