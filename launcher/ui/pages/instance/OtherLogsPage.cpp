@@ -391,7 +391,7 @@ void OtherLogsPage::on_btnDelete_clicked()
     }
     QFile file(FS::PathCombine(m_basePath, m_currentFile));
 
-    if (FS::trash(file.fileName())) {
+    if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(file.fileName())) {
         return;
     }
 
@@ -428,7 +428,7 @@ void OtherLogsPage::on_btnClean_clicked()
         QString absolutePath = FS::PathCombine(m_basePath, item);
         QFile file(absolutePath);
         qDebug() << "Deleting log" << absolutePath;
-        if (FS::trash(file.fileName())) {
+        if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(file.fileName())) {
             continue;
         }
         if (!file.remove()) {

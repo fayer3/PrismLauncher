@@ -19,6 +19,7 @@
 #include <QPushButton>
 #include <QSortFilterProxyModel>
 
+#include "BaseInstance.h"
 #include "Application.h"
 
 #include "IconPickerDialog.h"
@@ -208,7 +209,7 @@ void IconPickerDialog::addNewIcon()
 
 void IconPickerDialog::removeSelectedIcon()
 {
-    if (APPLICATION->icons()->trashIcon(selectedIconKey))
+    if (APPLICATION->settings()->get("UseRecycleBin").toBool() && APPLICATION->icons()->trashIcon(selectedIconKey))
         return;
 
     APPLICATION->icons()->deleteIcon(selectedIconKey);

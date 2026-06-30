@@ -172,6 +172,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="useRecycleBinCheckBox">
+            <property name="toolTip">
+              <string>Uses the Recycle Bin, if available, when deleting things.</string>
+            </property>
+            <property name="text">
+             <string>&amp;Use Recycle Bin</string>
+            </property>
+           </widget>
+         </item>
          </layout>
         </widget>
        </item>

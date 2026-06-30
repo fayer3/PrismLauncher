@@ -6,6 +6,7 @@
 #include <tuple>
 #include <utility>
 
+#include "Application.h"
 #include "FileSystem.h"
 #include "StringUtils.h"
 #include "minecraft/MinecraftInstance.h"
@@ -291,7 +292,8 @@ auto Resource::destroy(const QDir& indexDir, bool preserveMetadata, bool attempt
         destroyMetadata(indexDir);
     }
 
-    return (attemptTrash && FS::trash(m_file_info.filePath())) || FS::deletePath(m_file_info.filePath());
+    return (attemptTrash && APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(m_file_info.filePath())) ||
+           FS::deletePath(m_file_info.filePath());
 }
 
 auto Resource::destroyMetadata(const QDir& indexDir) -> void

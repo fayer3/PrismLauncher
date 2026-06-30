@@ -1517,7 +1517,7 @@ void MainWindow::on_actionDeleteInstance_triggered()
     if (!checkLinkedInstances(id, this, tr("Deleting")))
         return;
 
-    if (APPLICATION->instances()->trashInstance(id)) {
+    if (APPLICATION->settings()->get("UseRecycleBin").toBool() && APPLICATION->instances()->trashInstance(id)) {
         ui->actionUndoTrashInstance->setEnabled(APPLICATION->instances()->trashedSomething());
     } else {
         APPLICATION->instances()->deleteInstance(id);

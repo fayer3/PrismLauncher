@@ -52,6 +52,9 @@
 
 #include <optional>
 
+#include "BaseInstance.h"
+#include "Application.h"
+
 #include "FileSystem.h"
 #include "PSaveFile.h"
 #include "archive/ArchiveReader.h"
@@ -502,7 +505,7 @@ bool World::destroy()
     if (!m_isValid)
         return false;
 
-    if (FS::trash(m_containerFile.filePath()))
+    if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(m_containerFile.filePath()))
         return true;
 
     if (m_containerFile.isDir()) {

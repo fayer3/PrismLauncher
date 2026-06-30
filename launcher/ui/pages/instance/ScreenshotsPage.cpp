@@ -562,7 +562,7 @@ void ScreenshotsPage::on_actionDelete_triggered()
     }
 
     for (auto item : selected) {
-        if (FS::trash(m_model->filePath(item))) {
+        if (APPLICATION->settings()->get("UseRecycleBin").toBool() && FS::trash(m_model->filePath(item))) {
             continue;
         }
 
