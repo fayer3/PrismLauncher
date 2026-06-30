@@ -20,6 +20,27 @@
             }
         },
         {
+            "name": "windows_vs22",
+            "displayName": "Windows (visual studio 2022)",
+            "generator": "Visual Studio 17 2022",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "binaryDir": "build",
+            "installDir": "install",
+            "cacheVariables": {
+                "Launcher_BUILD_ARTIFACT": "$penv{ARTIFACT_NAME}",
+                "Launcher_BUILD_PLATFORM": "$penv{BUILD_PLATFORM}",
+                "CMAKE_TOOLCHAIN_FILE": "$penv{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "Launcher_ENABLE_JAVA_DOWNLOADER": "ON",
+                "ENABLE_LTO": "ON",
+                "VCPKG_HOST_TRIPLET": "x64-windows",
+                "JAVA_HOME": "$penv{JDK_17_HOME}"
+            }
+        },
+        {
             "name": "linux",
             "displayName": "Linux",
             "inherits": [
