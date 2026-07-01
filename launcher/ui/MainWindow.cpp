@@ -1610,7 +1610,7 @@ void MainWindow::instanceActivated(QModelIndex index)
 
 void MainWindow::on_actionLaunchInstance_triggered()
 {
-    if (m_selectedInstance && !m_selectedInstance->isRunning()) {
+    if (m_selectedInstance && (APPLICATION->settings()->get("AllowMulitpleInstances").toBool() || !m_selectedInstance->isRunning())) {
         APPLICATION->launch(m_selectedInstance);
     }
 }

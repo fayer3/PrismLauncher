@@ -648,6 +648,7 @@ Application::Application(int& argc, char** argv) : QApplication(argc, argv)
 
         m_settings->registerSetting("MenuBarInsteadOfToolBar", false);
         m_settings->registerSetting("UseRecycleBin", true);
+        m_settings->registerSetting("AllowMulitpleInstances", false);
 
         m_settings->registerSetting("NumberOfConcurrentTasks", 10);
         m_settings->registerSetting("NumberOfConcurrentDownloads", 6);
@@ -1806,6 +1807,13 @@ void Application::updateProxySettings(QString proxyTypeStr, QString addr, int po
     }
     proxyDesc += QString("%1:%2").arg(proxy.hostName()).arg(proxy.port());
     qDebug() << proxyDesc;
+}
+
+
+void Application::updateInstance() {
+    if (m_mainWindow) {
+        m_mainWindow->refreshCurrentInstance();
+    }
 }
 
 HttpMetaCache* Application::metacache()

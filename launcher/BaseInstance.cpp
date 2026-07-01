@@ -348,7 +348,7 @@ SettingsObject* BaseInstance::settings()
 
 bool BaseInstance::canLaunch() const
 {
-    return (!hasVersionBroken() && !isRunning());
+    return (!hasVersionBroken() && (APPLICATION->settings()->get("AllowMulitpleInstances").toBool() || !isRunning()));
 }
 
 bool BaseInstance::reloadSettings()
