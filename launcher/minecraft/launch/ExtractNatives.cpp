@@ -53,6 +53,16 @@ static bool unzipNatives(QString source, QString targetFolder, bool applyJnilibH
             name = replaceSuffix(name, ".jnilib", ".dylib");
         }
         QString absFilePath = directory.absoluteFilePath(name);
+        if (directory.exists(name)) {
+            // check if the file is already the same
+            QFile oldFile = QFile(absFilePath);
+            if (oldFile.open(QIODevice::ReadOnly)) {
+                QByteArray newData = f->readAll();
+                if (newData.size() == oldFile.size() && newData == oldFile.readAll()) {
+                    return true;
+                }
+            }
+        }
         return f->writeFile(ext, absFilePath, directory);
     });
 }
